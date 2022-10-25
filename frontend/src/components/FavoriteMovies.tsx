@@ -1,7 +1,6 @@
 import Card from "react-bootstrap/Card";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { addFavorites } from "../redux/movies/favoritesSlice";
+import { removeFromFavorites } from "../redux/movies/favoritesSlice";
 import { Button } from "react-bootstrap";
 
 type MovieProps = {
@@ -15,7 +14,7 @@ type MovieProps = {
   characters?: [];
 };
 
-const Movie = ({
+const FavoriteMovies = ({
   poster,
   title,
   crawl,
@@ -24,7 +23,6 @@ const Movie = ({
   producer,
   director,
 }: MovieProps) => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   return (
@@ -34,14 +32,15 @@ const Movie = ({
         src={poster}
         height="600px"
         style={{ objectFit: "cover", cursor: "pointer" }}
-        onClick={() => {
-          navigate(`/${id}`);
-        }}
       />
       <Card.Body className="d-flex flex-column">
         <Card.Title className="d-flex flex-column justify-content-between align-items-start mb-4 text-white">
           <span className="fs-2">{title}</span>
           <span className="text-muted">{date}</span>
+          <span>Producer:</span>
+          <span className="text-muted">{producer}</span>
+          <span>Director:</span>
+          <span className="text-muted">{director}</span>
         </Card.Title>
         <Card.Text
           className="text-white"
@@ -50,25 +49,15 @@ const Movie = ({
           {crawl}
         </Card.Text>
         <Button
-          onClick={() =>
-            dispatch(
-              addFavorites({
-                id,
-                poster,
-                title,
-                date,
-                crawl,
-                producer,
-                director,
-              })
-            )
-          }
+          onClick={() => {
+            dispatch(removeFromFavorites(id));
+          }}
         >
-          + Add to favorites
+          Remove from favorites
         </Button>
       </Card.Body>
     </Card>
   );
 };
 
-export default Movie;
+export default FavoriteMovies;

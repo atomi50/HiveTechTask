@@ -20,9 +20,20 @@ const favoritesSlice = createSlice({
         JSON.stringify(state.favorites.map((favorite: any) => favorite))
       );
     },
+    removeFromFavorites: (state: any, action) => {
+      localStorage.setItem(
+        "favorites",
+        JSON.stringify(
+          (state.favorites = state.favorites.filter(
+            (favorite: any) => favorite.id !== action.payload
+          ))
+        )
+      );
+    },
   },
 });
 
-export const { addFavorites } = favoritesSlice.actions;
+export const { addFavorites, removeFromFavorites } = favoritesSlice.actions;
 export const getFavorites = (state: any) => state.favorites.favorites;
+
 export default favoritesSlice.reducer;

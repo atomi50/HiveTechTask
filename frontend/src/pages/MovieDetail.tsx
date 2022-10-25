@@ -5,7 +5,6 @@ import { getAllMovies } from "../redux/movies/movieSlice";
 import { useParams } from "react-router-dom";
 import Movie from "../components/Movie";
 import { useFilms } from "../hooks/useFilm";
-import "./MovieDetails.css";
 
 interface Film {
   characters: string[];
