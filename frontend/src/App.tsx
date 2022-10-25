@@ -1,10 +1,10 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MovieDetails from "./pages/MovieDetail";
 import Home from "./pages/Home";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-  let { moviesId } = useParams();
   return (
     <BrowserRouter>
       <Routes>
