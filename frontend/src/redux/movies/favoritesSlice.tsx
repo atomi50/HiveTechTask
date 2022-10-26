@@ -14,11 +14,16 @@ const favoritesSlice = createSlice({
   initialState,
   reducers: {
     addFavorites: (state: any, action) => {
-      state.favorites.push({ ...action.payload });
-      localStorage.setItem(
-        "favorites",
-        JSON.stringify(state.favorites.map((favorite: any) => favorite))
+      const existingFavorite = state.favorites.find(
+        (item: any) => item.id === action.payload.id
       );
+      if (!existingFavorite) {
+        state.favorites.push({ ...action.payload });
+        localStorage.setItem(
+          "favorites",
+          JSON.stringify(state.favorites.map((favorite: any) => favorite))
+        );
+      } else return;
     },
     removeFromFavorites: (state: any, action) => {
       localStorage.setItem(
