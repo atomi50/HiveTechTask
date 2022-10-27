@@ -1,7 +1,5 @@
 import Card from "react-bootstrap/Card";
-import { useDispatch } from "react-redux";
-import { removeFromFavorites } from "../redux/movies/favoritesSlice";
-import { Button } from "react-bootstrap";
+import { PersonFill } from "react-bootstrap-icons";
 
 type MovieProps = {
   poster?: string;
@@ -14,7 +12,7 @@ type MovieProps = {
   characters?: [];
 };
 
-const FavoriteMovies = ({
+const MovieDetails = ({
   poster,
   title,
   crawl,
@@ -23,8 +21,6 @@ const FavoriteMovies = ({
   producer,
   director,
 }: MovieProps) => {
-  const dispatch = useDispatch();
-
   return (
     <Card className="bg-dark mb-2">
       <Card.Img
@@ -37,6 +33,10 @@ const FavoriteMovies = ({
         <Card.Title className="d-flex flex-column justify-content-between align-items-start mb-4 text-white">
           <span className="fs-2">{title}</span>
           <span className="text-muted">{date}</span>
+          <span>Producer:</span>
+          <span className="text-muted">{producer}</span>
+          <span>Director:</span>
+          <span className="text-muted">{director}</span>
         </Card.Title>
         <Card.Text
           className="text-white"
@@ -44,16 +44,9 @@ const FavoriteMovies = ({
         >
           {crawl}
         </Card.Text>
-        <Button
-          onClick={() => {
-            dispatch(removeFromFavorites(id));
-          }}
-        >
-          Remove from favorites
-        </Button>
       </Card.Body>
     </Card>
   );
 };
 
-export default FavoriteMovies;
+export default MovieDetails;
