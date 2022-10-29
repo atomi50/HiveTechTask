@@ -3,10 +3,6 @@ const express = require("express");
 const app = express();
 const port = 4000;
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
 app.get("/movies", (req, res) => {
   axios.get("https://swapi.dev/api/films/").then((response) => {
     const { results } = response.data;

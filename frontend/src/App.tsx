@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import MovieDetails from "./pages/MovieDetail";
+import MovieDetails from "./pages/MovieDetails";
 import Home from "./pages/Home";
 import { Navbar } from "./components/Navbar";
 import { Favorites } from "./pages/Favorites";
