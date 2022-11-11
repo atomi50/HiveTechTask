@@ -14,15 +14,7 @@ type MovieProps = {
   characters?: [];
 };
 
-const FavoriteMovies = ({
-  poster,
-  title,
-  crawl,
-  date,
-  id,
-  producer,
-  director,
-}: MovieProps) => {
+const FavoriteMovies = ({ poster, title, crawl, date, id }: MovieProps) => {
   const dispatch = useDispatch();
 
   return (

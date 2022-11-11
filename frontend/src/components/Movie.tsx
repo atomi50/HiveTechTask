@@ -65,7 +65,9 @@ const Movie = ({
           {crawl}
         </Card.Text>
         {isAdded === id ? (
-          <Button variant="success">Added to favorites</Button>
+          <Button className="btn__movies" variant="success">
+            Added to favorites
+          </Button>
         ) : (
           <Button
             onClick={() => {
