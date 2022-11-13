@@ -65,11 +65,12 @@ const Movie = ({
           {crawl}
         </Card.Text>
         {isAdded === id ? (
-          <Button className="btn__movies" variant="success">
+          <Button className="btn__favorites" variant="success">
             Added to favorites
           </Button>
         ) : (
           <Button
+            className="btn__addToFavorites"
             onClick={() => {
               dispatch(
                 addFavorites({

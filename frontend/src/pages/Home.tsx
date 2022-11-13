@@ -22,7 +22,7 @@ const Home = () => {
   const [movies, setMovies] = useState<any>([]);
 
   useEffect(() => {
-    axios.get("/movies/").then((response) => {
+    axios.get("/api/movies/").then((response) => {
       dispatch(addMovies(response.data));
       return setMovies(response.data);
     });
