@@ -7,12 +7,17 @@ const {
   deleteFavorites,
 } = require("../controllers/favoritesControllers");
 
-router.route("/").get(getFavorites).post(createFavorites); // shorter syntax because of the same route
+const { protect } = require("../middleware/authMiddleware");
+
+router.route("/").get(protect, getFavorites).post(protect, createFavorites); // shorter syntax because of the same route
 
 // router.get("/", getFavorites);
 
 // router.post("/", createFavorites);
 
-router.route("/:id").put(updateFavorites).delete(deleteFavorites);
+router
+  .route("/:id")
+  .put(protect, updateFavorites)
+  .delete(protect, deleteFavorites);
 
 module.exports = router;

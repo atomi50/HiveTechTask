@@ -1,3 +1,4 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const API_URL = "/api/users/";
@@ -14,6 +15,11 @@ const register = async (userData: any) => {
   return response.data;
 };
 
+// Logout user
+const logout = () => {
+  localStorage.removeItem("user");
+};
+
 // Login user
 const login = async (userData: any) => {
   const response = await axios.post(API_URL + "/login", userData);
@@ -28,6 +34,7 @@ const login = async (userData: any) => {
 const authService = {
   register,
   login,
+  logout,
 };
 
 export default authService;

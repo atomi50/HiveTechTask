@@ -8,7 +8,6 @@ import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { register, reset } from "./redux/auth/authSlice";
 
 function App() {
   return (

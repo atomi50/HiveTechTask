@@ -15,6 +15,7 @@ app.use("/api/movies", require("./routes/fetchedMovies"));
 
 // Routes for favorites
 app.use("/api/favorites", require("./routes/favoritesRoute"));
+app.use("/api/users", require("./routes/userRoutes"));
 
 app.use(errorHandler);
 

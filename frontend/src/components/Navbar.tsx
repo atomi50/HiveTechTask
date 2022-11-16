@@ -1,12 +1,26 @@
 import { Button, Container, Nav, Navbar as NavbarBS } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { StarFill } from "react-bootstrap-icons";
+import { MdLogin } from "react-icons/md";
+import { MdLogout } from "react-icons/md";
+import { AiOutlineUserAdd } from "react-icons/ai";
 import { getFavorites } from "../redux/movies/favoritesSlice";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { reset, logout } from "../redux/auth/authSlice";
+import { AppDispatch } from "../redux/store";
 
 export const Navbar = () => {
   const favorites = useSelector(getFavorites);
-  console.log(favorites.length);
+  const { user } = useSelector((state: any) => state.auth);
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+
+  const onLogout = () => {
+    dispatch(logout());
+    navigate("/");
+    dispatch(reset());
+  };
+
   return (
     <NavbarBS className="bg-dark shadow-lg mb-3 sticky-top">
       <Container>
@@ -36,55 +50,116 @@ export const Navbar = () => {
           </Button>
         </Nav.Link>
         <Nav className="ms-auto">
-          <Nav.Link className="text-white" to="/favorites" as={NavLink}>
-            <Button
-              style={{
-                outline: "none",
-                border: "none",
-                width: "2rem",
-                height: "2rem",
-                position: "relative",
-                top: "5%",
-              }}
-              className="rounded-circle bg-dark shadow-lg"
-            >
-              <h5
-                style={{
-                  position: "absolute",
-                  top: "10%",
-                  right: "125%",
-                  fontSize: "20px",
-                }}
-              >
-                Favorites
-              </h5>
-              <StarFill
-                style={{
-                  position: "absolute",
-                  top: "15%",
-                  right: "15%",
-                  fontSize: "20px",
-                  color: "yellow",
-                }}
-              />
-              {favorites.length > 0 ? (
-                <div
-                  className="rounded-circle bg-danger d-flex justify-content-center align-items-center"
+          {user ? (
+            <>
+              <Nav.Link className="text-white" to="/favorites" as={NavLink}>
+                <Button
                   style={{
-                    color: "white",
-                    width: "1rem",
-                    height: "1rem",
-                    position: "absolute",
-                    bottom: "0",
-                    right: "0",
-                    transform: "translate(20%,20%)",
+                    outline: "none",
+                    border: "none",
+                    width: "2rem",
+                    height: "2rem",
+                    position: "relative",
+                    top: "5%",
                   }}
+                  className="rounded-circle bg-dark shadow-lg"
                 >
-                  {favorites.length}
-                </div>
-              ) : null}
-            </Button>
-          </Nav.Link>
+                  <h5
+                    style={{
+                      position: "absolute",
+                      top: "10%",
+                      right: "125%",
+                      fontSize: "20px",
+                    }}
+                  >
+                    Favorites
+                  </h5>
+                  <StarFill
+                    style={{
+                      position: "absolute",
+                      top: "15%",
+                      right: "15%",
+                      fontSize: "20px",
+                      color: "yellow",
+                    }}
+                  />
+                  {favorites.length > 0 ? (
+                    <div
+                      className="rounded-circle bg-danger d-flex justify-content-center align-items-center"
+                      style={{
+                        color: "white",
+                        width: "1rem",
+                        height: "1rem",
+                        position: "absolute",
+                        bottom: "0",
+                        right: "0",
+                        transform: "translate(20%,20%)",
+                      }}
+                    >
+                      {favorites.length}
+                    </div>
+                  ) : null}
+                </Button>
+              </Nav.Link>
+              <Button
+                className="bg-dark shadow-lg"
+                style={{
+                  transform: "translate(20%, 5%)",
+                  fontSize: "1.3rem",
+                  border: "none",
+                }}
+                onClick={onLogout}
+              >
+                Logout
+                <MdLogout
+                  style={{
+                    fontSize: "2rem",
+                    transform: "translate(20%, -2%)",
+                    color: "yellow",
+                  }}
+                />
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                className="bg-dark shadow-lg"
+                style={{
+                  transform: "translate(20%, 5%)",
+                  fontSize: "1.3rem",
+                  border: "none",
+                }}
+                onClick={() => navigate("/login")}
+              >
+                Login
+                <MdLogin
+                  style={{
+                    fontSize: "2rem",
+                    transform: "translate(, -2%)",
+                    color: "yellow",
+                  }}
+                />
+              </Button>
+              <Button
+                className="bg-dark shadow-lg"
+                style={{
+                  transform: "translate(20%, 5%)",
+                  fontSize: "1.3rem",
+                  border: "none",
+                }}
+                onClick={() => navigate("/register")}
+              >
+                Register
+                <AiOutlineUserAdd
+                  style={{
+                    fontSize: "1.5rem",
+                    transform: "translate(15%, -10%)",
+                    color: "yellow",
+                  }}
+                />
+              </Button>
+            </>
+          )}
         </Nav>
       </Container>
     </NavbarBS>
